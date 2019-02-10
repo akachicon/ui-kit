@@ -1,0 +1,23 @@
+include ../layout/layout
+
+-
+  var assets = {
+    '/root/favicon.png': require('./favicon.png')
+  }
+
+  function getAssetUrl(absolutePathUsingBlocksAsRoot) {
+    return assets[absolutePathUsingBlocksAsRoot]
+  }
+
+doctype html
+html(lang="")
+  head
+    meta(charset="utf-8")
+
+    title #{title}
+
+    meta(name="description" content="")
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+
+  body
+    +layout

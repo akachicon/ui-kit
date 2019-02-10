@@ -1,0 +1,19 @@
+# Node build artifacts
+node_modules
+
+# Logs
+npm-debug.log
+bundle-report.html
+
+# Local development
+.idea
+
+# Fonts
+*/src/*.ttf
+*/src/*.otf
+*/src/*.woff
+*/src/*.svg
+
+# Misc
+*.txt
+dist/*
