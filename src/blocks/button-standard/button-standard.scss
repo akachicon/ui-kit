@@ -1,0 +1,85 @@
+.button-standard {
+  font-family: 'Lato Black', sans-serif;
+  font-size: .78rem;
+  text-transform: uppercase;
+  position: relative;
+  border-width: 1px 1px 0 1px;
+  border-radius: .2rem;
+  border-style: solid;
+  background: transparent;
+  overflow: hidden;
+  transition: all .1s;
+
+  &:hover {
+    cursor: pointer;
+
+    // To preserve text color in all cases use specificity.
+
+    .button-standard__text {
+      color: white;
+    }
+  }
+
+  &_size {
+    &_s {
+      font-size: .65rem;
+      padding: .33rem 1rem .15rem 1rem;
+      box-shadow: 0 2px;
+
+      &:active {
+        transform: translate(0, 2px);
+        box-shadow: 0 0;
+      }
+    }
+
+    &_m {
+      padding: .58rem 1.98rem .4rem 1.98rem;
+      box-shadow: 0 4px;
+
+      &:active {
+        transform: translate(0, 4px);
+        box-shadow: 0 0;
+      }
+    }
+  }
+
+  &_color {
+    &_terracotta {
+      color: #e75735;
+      border-color: #e75735;
+
+      &:hover {
+        color: #bf3e1f;
+        background: #e75735;
+      }
+    }
+
+    &_turquoise {
+      color: #4eb7a8;
+      border-color: #4eb7a8;
+
+      &:hover {
+        color: #28a290;
+        background: #4eb7a8;
+      }
+    }
+  }
+
+  &__ripple {
+    box-sizing: border-box;
+    position: absolute;
+    padding: 100%;
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    background: white;
+    opacity: .7;
+    animation: ripple .5s linear;
+
+    @keyframes ripple {
+      to {
+        transform: translate(-50%, -50%) scale(1.5);
+        opacity: 0;
+      }
+    }
+  }
+}

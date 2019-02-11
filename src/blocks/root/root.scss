@@ -1,4 +1,25 @@
+@mixin font-face($font, $path) {
+  @font-face {
+    font-family: $font;
+    src: url($path + '.woff') format('woff'),
+      url($path + '.ttf') format('ttf'),
+      url($path + '.otf') format('otf'),
+      url($path + '.svg') format('svg');
+    font-display: swap;
+  }
+}
+
+$fonts: (
+        'Lato Black': './fonts/lato-black/lato-black',
+);
+
+@each $font, $path in $fonts {
+  @include font-face($font, $path);
+}
+
 html, body {
   margin: 0;
   padding: 0;
 }
+
+@import '../layout/layout';

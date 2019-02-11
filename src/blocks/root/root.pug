@@ -1,12 +1,36 @@
 include ../layout/layout
 
 -
-  var assets = {
-    '/root/favicon.png': require('./favicon.png')
-  }
+  const globals = {
+    _assets: {
+      '/root/favicon.png': require('./favicon.png')
+    },
 
-  function getAssetUrl(absolutePathUsingBlocksAsRoot) {
-    return assets[absolutePathUsingBlocksAsRoot]
+    getAssetUrl(absolutePathUsingBlocksAsRoot) {
+      return this._assets[absolutePathUsingBlocksAsRoot]
+    },
+
+    getClassList(entity = {}) {
+      const { block, element, mods = {} } = entity;
+      let prefix = block;
+
+      if (element) {
+        prefix += `__${element}`;
+      }
+
+      let classList = prefix;
+
+      Object.keys(mods).forEach((modName) => {
+        let modValue = mods[modName];
+
+        classList += ` ${prefix}_${modName}`;
+        if (modValue) {
+          classList += `_${modValue}`;
+        }
+      })
+
+      return classList;
+    }
   }
 
 doctype html
