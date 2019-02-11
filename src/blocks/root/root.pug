@@ -23,9 +23,12 @@ include ../layout/layout
       Object.keys(mods).forEach((modName) => {
         let modValue = mods[modName];
 
-        classList += ` ${prefix}_${modName}`;
         if (modValue) {
-          classList += `_${modValue}`;
+          if (typeof modValue === 'boolean') {
+            classList += ` ${prefix}_${modName}`;
+          } else {
+            classList += ` ${prefix}_${modName}_${modValue}`;
+          }
         }
       })
 

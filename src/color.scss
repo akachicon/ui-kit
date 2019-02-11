@@ -1,0 +1,8 @@
+$colors: (
+        terracotta: #e75735,
+        turquoise: #4eb7a8
+);
+
+@function color($colorName) {
+  @return map-get($colors, $colorName);
+}

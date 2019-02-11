@@ -1,0 +1,17 @@
+mixin button-arrow(mods = {})
+  -
+    const { getClassList } = globals;
+
+    const defaults = {
+      direction: 'left',
+      disabled: false,
+      size: 'm',
+      color: 'turquoise'
+    }
+
+    const classList = getClassList({
+      block: 'button-arrow',
+      mods: Object.assign(defaults, mods)
+    })
+
+  button(class=classList)

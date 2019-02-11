@@ -1,3 +1,5 @@
+@import '../../color';
+
 .button-standard {
   font-family: 'Lato Black', sans-serif;
   font-size: .78rem;
@@ -6,12 +8,12 @@
   border-width: 1px 1px 0 1px;
   border-radius: .2rem;
   border-style: solid;
-  background: transparent;
+  background: white;
   overflow: hidden;
-  transition: all .1s;
+  transition: all .1s linear;
 
   &:hover {
-    cursor: pointer;
+    cursor: url('./button-standard__pointer.png') 4 0, pointer;
 
     // To preserve text color in all cases use specificity.
 
@@ -45,22 +47,22 @@
 
   &_color {
     &_terracotta {
-      color: #e75735;
-      border-color: #e75735;
+      color: color(terracotta);
+      border-color: color(terracotta);
 
       &:hover {
         color: #bf3e1f;
-        background: #e75735;
+        background: color(terracotta);
       }
     }
 
     &_turquoise {
-      color: #4eb7a8;
-      border-color: #4eb7a8;
+      color: color(turquoise);
+      border-color: color(turquoise);
 
       &:hover {
         color: #28a290;
-        background: #4eb7a8;
+        background: color(turquoise);
       }
     }
   }
