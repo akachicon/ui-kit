@@ -1,4 +1,9 @@
 include ../button-standard/button-standard
 include ../button-arrow/button-arrow
+include ../percentage-circle/percentage-circle
 
 mixin layout
+  +percentage-circle(72)
+  +percentage-circle(35, { size: 's' })
+  +percentage-circle(55, { color: 'turquoise' })
+  +percentage-circle(90, { color: 'turquoise', size: 's' })

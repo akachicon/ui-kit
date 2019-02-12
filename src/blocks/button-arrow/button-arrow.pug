@@ -7,11 +7,11 @@ mixin button-arrow(mods = {})
       disabled: false,
       size: 'm',
       color: 'turquoise'
-    }
+    };
 
-    const classList = getClassList({
+    const buttonArrow = getClassList({
       block: 'button-arrow',
       mods: Object.assign(defaults, mods)
-    })
+    });
 
-  button(class=classList)
+  button(class=buttonArrow)

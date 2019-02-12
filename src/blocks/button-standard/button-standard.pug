@@ -1,21 +1,21 @@
-mixin button-standard(text = 'button', mods = {})
+mixin button-standard(buttonText = 'button', mods = {})
   -
     const { getClassList } = globals;
 
     const defaults = {
       size: 'm',
       color: 'terracotta'
-    }
+    };
 
-    const buttonClassList = getClassList({
+    const buttonStandard = getClassList({
       block: 'button-standard',
       mods: Object.assign(defaults, mods)
-    })
+    });
 
-    const textClassList = getClassList({
+    const text = getClassList({
       block: 'button-standard',
       element: 'text'
-    })
+    });
 
-  button(class=buttonClassList)
-    span(class=textClassList)= text
+  button(class=buttonStandard)
+    span(class=text)= buttonText

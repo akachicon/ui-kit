@@ -1,0 +1,38 @@
+mixin percentage-circle(pct, mods = {})
+  -
+    const { getClassList } = globals;
+
+    const circleElement = (name) => (
+      getClassList({
+        block: 'percentage-circle',
+        element: name
+      })
+    );
+
+    const defaults = {
+      size: 'm',
+      color: 'terracotta'
+    };
+
+    const percentageCircle = getClassList({
+      block: 'percentage-circle',
+      mods: Object.assign(defaults, mods)
+    });
+
+    const text = circleElement('text');
+    const circleContainer = circleElement('circle-container');
+    const circle = circleElement('circle');
+
+  div(class=percentageCircle)
+    span(class=text)=pct
+
+    svg(class=circleContainer)
+      - const PI = 3.14159265359;
+
+      circle(
+        class=circle
+        cx='50%'
+        cy='50%'
+        r='50%'
+        stroke-dasharray=`${PI * pct}% ${PI * 100}%`
+      )
