@@ -85,8 +85,8 @@
 
   &_disabled {
     pointer-events: none;
-    background: #e5e5e5;
-    border-color: #e5e5e5;
+    background: color(light-grey);
+    border-color: color(light-grey);
 
     &:after {
       border-color: white;

@@ -1,0 +1,53 @@
+mixin pie-chart(pieces, mods = {})
+  -
+    const { getClassList } = globals;
+
+    const pieChartElement = (name, color) => (
+      getClassList({
+        block: 'pie-chart',
+        element: name,
+        mods: { color }
+      })
+    );
+
+    const defaults = {
+      size: 'm'
+    };
+
+    const pieChart = getClassList({
+      block: 'pie-chart',
+      mods: Object.assign(defaults, mods)
+    });
+
+  div(class=pieChart)
+    -
+      const PI = 3.14159265359;
+      const totalShare = pieces
+        .reduce((acc, { share }) => acc + share, 0);
+
+      let totalPct = 0;
+
+    each element in pieces
+      -
+        const pieceContainer = pieChartElement('piece-container');
+        const piece = pieChartElement('piece', element.color);
+
+      svg(class=pieceContainer)
+        -
+          const sharePct = element.share / totalShare * 100;
+          const stroke = {
+            start: PI * totalPct,
+            length: PI * sharePct,
+            emptySpace: PI * 100
+          };
+
+        circle(
+          class=piece
+          cx='50%'
+          cy='50%'
+          r='50%'
+        )&attributes({
+          'stroke-dasharray':
+            `0 ${stroke.start}% ${stroke.length}% ${stroke.emptySpace}%`
+        })
+        - totalPct += sharePct

@@ -1,6 +1,8 @@
 $colors: (
         terracotta: #e75735,
-        turquoise: #4eb7a8
+        turquoise: #4eb7a8,
+        dark-grey: #747474,
+        light-grey: #e5e5e5
 );
 
 @function color($colorName) {

@@ -1,0 +1,85 @@
+@import '../../color';
+
+@function calc-circle-transform($containerWidth, $gapWidth) {
+  $scale: ($containerWidth - $gapWidth) / $containerWidth;
+  $offsetPct: (1 - $scale) / 2 * 100%;
+
+  @return (offsetPct: $offsetPct, scale: $scale);
+}
+
+@mixin piece-size-modifier($pieceContainerWidth, $pieceWidth) {
+  .pie-chart__piece {
+    $pieceTransform: calc-circle-transform(
+                    $pieceContainerWidth,
+                    $pieceWidth
+    );
+
+    $offset: map-get($pieceTransform, offsetPct);
+    $scale: map-get($pieceTransform, scale);
+
+    // We have to "rescale" $pieceWidth as it is scaled by transform.
+
+    transform: translate($offset, $offset) scale($scale);
+    stroke-width: $pieceWidth / $scale;
+  }
+}
+
+.pie-chart {
+  position: relative;
+
+  &__piece-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+  }
+
+  &__piece {
+    fill: transparent;
+
+    &_color {
+      &_terracotta {
+        stroke: color(terracotta);
+      }
+
+      &_turquoise {
+        stroke: color(turquoise);
+      }
+
+      &_dark-grey {
+        stroke: color(dark-grey);
+      }
+
+      &_light-grey {
+        stroke: color(light-grey);
+      }
+    }
+  }
+
+  &_size {
+    &_s {
+      $blockSide: 3.88rem;
+
+      width: $blockSide;
+      height: $blockSide;
+
+      @include piece-size-modifier(
+              $pieceContainerWidth: $blockSide,
+              $pieceWidth: .75rem
+      );
+    }
+
+    &_m {
+      $blockSide: 5.94rem;
+
+      width: $blockSide;
+      height: $blockSide;
+
+
+      @include piece-size-modifier(
+              $pieceContainerWidth: $blockSide,
+              $pieceWidth: 1.15rem
+      );
+    }
+  }
+}

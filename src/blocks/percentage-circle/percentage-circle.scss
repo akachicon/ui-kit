@@ -1,30 +1,31 @@
 @import '../../color';
 
-// This function calculates transformations to fit
-// circle stroke exactly in parent container.
-
-@function calc-transform($containerWidth, $strokeWidth) {
-  $scale: $containerWidth / ($containerWidth + $strokeWidth);
+@function calc-circle-transform($containerWidth, $gapWidth) {
+  $scale: ($containerWidth - $gapWidth) / $containerWidth;
   $offsetPct: (1 - $scale) / 2 * 100%;
 
   @return (offsetPct: $offsetPct, scale: $scale);
 }
 
 @mixin circle-size-modifier($circleContainerWidth, $circleWidth) {
-  & .percentage-circle__circle {
-    $circleTransform: calc-transform($circleContainerWidth, $circleWidth);
+  .percentage-circle__circle {
+    $circleTransform: calc-circle-transform(
+                    $circleContainerWidth,
+                    $circleWidth
+    );
 
     $offset: map-get($circleTransform, offsetPct);
     $scale: map-get($circleTransform, scale);
 
-    stroke-width: $circleWidth;
+    // We have to "rescale" $circleWidth as it is scaled by transform.
+
     transform: translate($offset, $offset) scale($scale);
+    stroke-width: $circleWidth / $scale;
   }
 }
 
 .percentage-circle {
   position: relative;
-  overflow: hidden;
 
   &__text {
     font-family: 'Lato Light', sans-serif;
@@ -52,13 +53,13 @@
       width: $blockSide;
       height: $blockSide;
 
-      & .percentage-circle__text {
+      .percentage-circle__text {
         font-size: 1.63rem;
       }
 
       @include circle-size-modifier(
-        $circleContainerWidth: $blockSide,
-        $circleWidth: .24rem
+              $circleContainerWidth: $blockSide,
+              $circleWidth: .2rem
       );
     }
 
@@ -68,13 +69,13 @@
       width: $blockSide;
       height: $blockSide;
 
-      & .percentage-circle__text {
+      .percentage-circle__text {
         font-size: 2.5rem;
       }
 
       @include circle-size-modifier(
-        $circleContainerWidth: $blockSide,
-        $circleWidth: .37rem
+              $circleContainerWidth: $blockSide,
+              $circleWidth: .3rem
       );
     }
   }
@@ -82,13 +83,13 @@
   &_color {
     &_terracotta {
       & .percentage-circle__circle {
-        stroke: color(terracotta)
+        stroke: color(terracotta);
       }
     }
 
     &_turquoise {
       & .percentage-circle__circle {
-        stroke: color(turquoise)
+        stroke: color(turquoise);
       }
     }
   }

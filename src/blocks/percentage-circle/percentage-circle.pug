@@ -24,15 +24,20 @@ mixin percentage-circle(pct, mods = {})
     const circle = circleElement('circle');
 
   div(class=percentageCircle)
-    span(class=text)=pct
+    span(class=text)= pct
 
     svg(class=circleContainer)
-      - const PI = 3.14159265359;
+      -
+        const PI = 3.14159265359;
+        const stroke = {
+          length: PI * pct,
+          emptySpace: PI * 100
+        };
 
       circle(
         class=circle
         cx='50%'
         cy='50%'
         r='50%'
-        stroke-dasharray=`${PI * pct}% ${PI * 100}%`
+        stroke-dasharray=`${stroke.length}% ${stroke.emptySpace}%`
       )
