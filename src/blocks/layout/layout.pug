@@ -2,10 +2,27 @@ include ../button-standard/button-standard
 include ../button-arrow/button-arrow
 include ../percentage-circle/percentage-circle
 include ../pie-chart/pie-chart
+include ../range-slider/range-slider
 
 mixin layout
-  +pie-chart([
-    { share: 3, color: 'light-grey' },
-    { share: 2, color: 'terracotta' },
-    { share: 3, color: 'turquoise' }
-  ])
+  div(style='padding: 100px')
+    +range-slider({
+      min: 0,
+      max: 100,
+      step: 5,
+      hint: true,
+      scale: {
+        0: 0,
+        25: 25,
+        50: 50,
+        75: 75,
+        100: 100
+      }
+    }, {
+      'track-size': 's',
+      'thumb-size': 'm',
+      color: 'turquoise',
+      fill: true,
+      hint: true,
+      scale: true
+    })

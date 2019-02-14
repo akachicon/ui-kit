@@ -1,0 +1,70 @@
+mixin range-slider(params, mods)
+  -
+    const { getClassList } = globals;
+
+    const rangeSliderElement = (name, mods) => (
+      getClassList({
+        block: 'range-slider',
+        element: name,
+        mods
+      })
+    );
+
+    const defaults = {
+      color: 'terracotta',
+      hint: false,
+      scale: false,
+      'track-size': 's',
+      'thumb-size': 's'
+    };
+
+    const rangeSlider = getClassList({
+      block: 'range-slider',
+      mods: Object.assign(defaults, mods)
+    });
+    const input = rangeSliderElement('input');
+    const hint = rangeSliderElement('hint');
+    const scale = rangeSliderElement('scale');
+    const scaleMark = rangeSliderElement('scale-mark');
+    const scaleMarkChecker = rangeSliderElement(
+      'scale-mark',
+      {
+        checker: true
+      });
+
+    const defaultParams = {
+      min: 0,
+      max: 100,
+      step: 1
+    }
+    // These do not affect the plugin:
+    const additionalParams = ['hint', 'scale'];
+    const attrs = Object.assign(defaultParams, params);
+
+    additionalParams.forEach((paramName) => {
+      attrs[`data-${paramName}`] = !!params[paramName];
+      delete attrs[paramName];
+    });
+
+  div(class=rangeSlider)
+    input(
+      type='range'
+      class=input
+    )&attributes(attrs)
+
+    if params.hint
+      div(class=hint)
+    if params.scale
+      div(class=scale)
+        // scaleMarkChecker span is used to calc the container height.
+
+        span(
+          class=scaleMarkChecker
+        )= '0123456789'
+
+        each mark, value in params.scale
+          span(
+            class=scaleMark
+            style=`left: ${value / (attrs.max - attrs.min) * 100}%`
+            data-value=value
+          )= mark

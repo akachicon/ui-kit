@@ -1,0 +1,241 @@
+@import '../../color';
+
+$trackSizeMap: (
+  s: .3rem,
+  m: .7rem,
+  l: 1.2rem,
+);
+$thumbSizeMap: (
+  s: .8rem,
+  m: 1.25rem,
+  l: 2.5rem,
+);
+
+@function calc-track-margin($trackSizeValue, $thumbSizeValue) {
+  $margin: ($thumbSizeValue - $trackSizeValue) / 2;
+
+  @if $margin <= 0 { $margin: 0 }
+
+  @return $margin;
+}
+
+.range-slider {
+  position: relative;
+
+  &__track {
+    display: block;
+    position: relative;
+    cursor: pointer;
+    background: color(light-grey);
+
+    &_horizontal {
+      .range-slider__fill {
+        height: 100%;
+      }
+    }
+
+    &_disabled {
+      opacity: .4;
+    }
+  }
+
+  &__thumb {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+    background: transparent;
+
+    // The actual thumb view is represented by its :after pseudo-class.
+
+    &:after{
+      content: '';
+      display: block;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  &__fill {
+    display: none;  // the modifier is not applied
+  }
+
+  &__scale {
+    display: none; // the modifier is not applied
+    padding-top: .1rem;
+    position: relative;
+  }
+
+  &__scale-mark {
+    font-family: 'Lato Black', sans-serif;
+    font-size: .7rem;
+    color: color(light-grey);
+    position: absolute;
+    transform: translate(-50%);
+
+    &_checker {
+      // This class is used to calculate container height.
+
+      position: static;
+      color: transparent !important;
+    }
+  }
+
+  &__hint {
+    font-family: 'Lato Black', sans-serif;
+    font-size: .8rem;
+    color: white;
+    display: none; // the modifier is not applied
+    position: absolute;
+    padding: {
+      top: .35rem;
+      right: .65rem;
+      bottom: .2rem;
+      left: .65rem;
+    }
+    border-radius: .3rem;
+    bottom: 100%;
+    transform: translate(-50%, -.5rem);
+
+    &:after {
+      content: '';
+      display: block;
+      box-sizing: border-box;
+      position: absolute;
+      width: .25rem;
+      left: 50%;
+      top: 100%;
+      transform: translate(-50%);
+      border: {
+        top: .25rem solid;
+        left: .25rem solid transparent;
+        right: .25rem solid transparent;
+      }
+    }
+  }
+
+  &_track-size {
+    @each $trackSize in map-keys($trackSizeMap) {
+      $trackSizeValue: map-get($trackSizeMap, $trackSize);
+
+      &_#{$trackSize} {
+        .range-slider__track {
+          border-radius: $trackSizeValue / 2;
+
+          &_horizontal {
+            display: block;
+            height: $trackSizeValue;
+
+            .range-slider__fill {
+              border: {
+                top-left-radius: $trackSizeValue / 2;
+                bottom-left-radius: $trackSizeValue / 2;
+              }
+            }
+          }
+        }
+
+        // The thumb is represented by its :after pseudo-class
+        // but the real logic is applied to the thumb element
+        // which has to be the same as the track.
+
+        .range-slider__thumb {
+          width: $trackSizeValue;
+          height: $trackSizeValue;
+        }
+
+        @each $thumbSize in map-keys($thumbSizeMap) {
+          &.range-slider_thumb-size_#{$thumbSize} {
+            $thumbSizeValue: map-get($thumbSizeMap, $thumbSize);
+            $trackMargin: calc-track-margin($trackSizeValue, $thumbSizeValue);
+            $scaleMargin: $trackSizeValue / 2;
+
+            padding: {
+              top: $trackMargin;
+              right: $trackMargin;
+              left: $trackMargin;
+            }
+
+            .range-slider__track {
+              margin: {
+                bottom: $trackMargin;
+              }
+            }
+
+            .range-slider__thumb:after {
+              width: $thumbSizeValue;
+              height: $thumbSizeValue;
+            }
+
+            .range-slider__scale {
+              margin: {
+                left: $scaleMargin;
+                right: $scaleMargin;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &_color {
+    &_terracotta {
+      .range-slider__fill {
+        background: color(terracotta);
+      }
+
+      .range-slider__thumb:after {
+        background: color(terracotta);
+      }
+
+      .range-slider__hint {
+        background: color(terracotta);
+
+        &:after {
+          border-top-color: color(terracotta);
+        }
+      }
+    }
+
+    &_turquoise {
+      .range-slider__fill {
+        background: color(turquoise);
+      }
+
+      .range-slider__thumb:after {
+        background: color(turquoise);
+      }
+
+      .range-slider__hint {
+        background: color(turquoise);
+
+        &:after {
+          border-top-color: color(turquoise);
+        }
+      }
+    }
+  }
+
+  &_fill {
+    .range-slider__fill {
+      display: block;
+    }
+  }
+
+  &_hint {
+    .range-slider__hint {
+      display: block;
+    }
+  }
+
+  &_scale {
+    .range-slider__scale {
+      display: block;
+    }
+  }
+}

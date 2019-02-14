@@ -141,6 +141,10 @@ module.exports = {
   },
   plugins: [
     new CleanWebpackPlugin(['dist'], { root: project.basePath }),
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+      jQuery: 'jquery'
+    }),
     new HtmlWebpackPlugin({
       inlineSource: 'runtime',
       filename: project.html.output.filename,
