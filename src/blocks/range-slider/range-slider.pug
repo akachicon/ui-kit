@@ -56,12 +56,6 @@ mixin range-slider(params, mods)
       div(class=hint)
     if params.scale
       div(class=scale)
-        // scaleMarkChecker span is used to calc the container height.
-
-        span(
-          class=scaleMarkChecker
-        )= '0123456789'
-
         each mark, value in params.scale
           span(
             class=scaleMark

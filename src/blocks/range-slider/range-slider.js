@@ -24,6 +24,18 @@ $('.range-slider__input').rangeslider({
 
       hintOnSlide(this.position, this.value);
       $input.data('hintOnSlide', hintOnSlide);
+
+      const { update } = this;
+      const that = this;
+
+      // A way to trigger a hint update whenever
+      // the plugin updates data (e.g. on resize):
+
+      // eslint-disable-next-line func-names
+      this.update = function (...args) {
+        update.call(that, ...args);
+        hintOnSlide(this.position, this.value);
+      };
     }
   },
 

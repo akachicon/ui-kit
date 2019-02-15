@@ -66,7 +66,7 @@ $thumbSizeMap: (
 
   &__scale {
     display: none; // the modifier is not applied
-    padding-top: .1rem;
+    height: .7rem;
     position: relative;
   }
 
@@ -76,13 +76,6 @@ $thumbSizeMap: (
     color: color(light-grey);
     position: absolute;
     transform: translate(-50%);
-
-    &_checker {
-      // This class is used to calculate container height.
-
-      position: static;
-      color: transparent !important;
-    }
   }
 
   &__hint {
@@ -185,57 +178,33 @@ $thumbSizeMap: (
 
   &_color {
     &_terracotta {
-      .range-slider__fill {
-        background: color(terracotta);
-      }
-
+      .range-slider__fill,
+      .range-slider__hint,
       .range-slider__thumb:after {
         background: color(terracotta);
       }
 
-      .range-slider__hint {
-        background: color(terracotta);
-
-        &:after {
-          border-top-color: color(terracotta);
-        }
+      .range-slider__hint:after {
+        border-top-color: color(terracotta);
       }
     }
 
     &_turquoise {
-      .range-slider__fill {
-        background: color(turquoise);
-      }
-
+      .range-slider__fill,
+      .range-slider__hint,
       .range-slider__thumb:after {
         background: color(turquoise);
       }
 
-      .range-slider__hint {
-        background: color(turquoise);
-
-        &:after {
+      .range-slider__hint:after {
           border-top-color: color(turquoise);
-        }
       }
     }
   }
 
-  &_fill {
-    .range-slider__fill {
+  &_fill .range-slider__fill,
+  &_hint .range-slider__hint,
+  &_scale .range-slider__scale {
       display: block;
-    }
-  }
-
-  &_hint {
-    .range-slider__hint {
-      display: block;
-    }
-  }
-
-  &_scale {
-    .range-slider__scale {
-      display: block;
-    }
   }
 }

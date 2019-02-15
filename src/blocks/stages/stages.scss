@@ -1,0 +1,84 @@
+@import '../../color';
+
+.stages {
+  display: flex;
+  align-items: center;
+
+  &__line {
+    position: relative;
+    width: 100%;
+    background: color(light-grey);
+  }
+
+  &__fill {
+    height: 100%;
+  }
+
+  &__stage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Lato Black', sans-serif;
+    font-size: .85rem;
+    color: color(dark-grey);
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: color(light-grey);
+
+    &_filled {
+      color: white;
+    }
+  }
+
+  &_line-thickness {
+    @mixin line-thickness-mod($name, $thickness) {
+      &_#{$name} {
+        .stages__line {
+          height: $thickness;
+        }
+      }
+    }
+
+    @include line-thickness-mod(s, .3rem);
+    @include line-thickness-mod(m, 1rem);
+  }
+
+  &_stage-radius {
+    @mixin stage-radius-mod($name, $radius, $fontSize) {
+      $diameter: 2 * $radius;
+
+      &_#{$name} {
+        padding: {
+          right: $radius;
+          left: $radius;
+        }
+        height: $diameter;
+
+        .stages__stage {
+          font-size: $fontSize;
+          width: $diameter;
+          height: $diameter;
+        }
+      }
+    }
+
+    @include stage-radius-mod(s, .87rem, .85rem);
+    @include stage-radius-mod(m, 1.5rem, 1.2rem);
+  }
+
+  &_color {
+    @mixin color-mod($color) {
+      &_#{$color} {
+        .stages__fill,
+        .stages__stage_filled {
+          background: color($color);
+        }
+      }
+    }
+
+    @include color-mod(turquoise);
+    @include color-mod(terracotta);
+  }
+}

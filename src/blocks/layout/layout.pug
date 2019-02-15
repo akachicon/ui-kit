@@ -3,26 +3,15 @@ include ../button-arrow/button-arrow
 include ../percentage-circle/percentage-circle
 include ../pie-chart/pie-chart
 include ../range-slider/range-slider
+include ../stages/stages
 
 mixin layout
   div(style='padding: 100px')
-    +range-slider({
-      min: 0,
-      max: 100,
-      step: 5,
-      hint: true,
-      scale: {
-        0: 0,
-        25: 25,
-        50: 50,
-        75: 75,
-        100: 100
-      }
+    +stages({
+      current: 3,
+      max: 5
     }, {
-      'track-size': 's',
-      'thumb-size': 'm',
       color: 'turquoise',
-      fill: true,
-      hint: true,
-      scale: true
+      'line-thickness': 's',
+      'stage-radius': 's'
     })
