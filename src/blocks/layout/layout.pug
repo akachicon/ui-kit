@@ -4,14 +4,10 @@ include ../percentage-circle/percentage-circle
 include ../pie-chart/pie-chart
 include ../range-slider/range-slider
 include ../stages/stages
+include ../toggle/toggle
 
 mixin layout
-  div(style='padding: 100px')
-    +stages({
-      current: 3,
-      max: 5
-    }, {
-      color: 'turquoise',
-      'line-thickness': 's',
-      'stage-radius': 's'
-    })
+  +toggle({
+    color: 'turquoise',
+    size: 'm'
+  })

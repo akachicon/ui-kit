@@ -1,0 +1,31 @@
+mixin toggle(mods)
+  -
+    const { getClassList } = globals;
+
+    const toggleElement = (name) => (
+      getClassList({
+        block: 'toggle',
+        element: name
+      })
+    )
+
+    const defaults = {
+      color: 'terracotta',
+      size: 'm'
+    };
+
+    const toggle = getClassList({
+      block: 'toggle',
+      mods: Object.assign(defaults, mods)
+    });
+    const checkbox = toggleElement('checkbox');
+    const view = toggleElement('view');
+    const viewSwitch = toggleElement('view-switch');
+
+  label(class=toggle)
+    input(
+      type='checkbox'
+      class=checkbox
+    )
+    span(class=view)
+      span(class=viewSwitch) &#9679;

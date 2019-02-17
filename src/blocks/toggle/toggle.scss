@@ -1,0 +1,119 @@
+@import '../../color';
+
+@mixin text {
+  display: block;
+  overflow: hidden;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+@mixin active-text {
+  color: white;
+  width: 100%;
+}
+
+@mixin inactive-text {
+  color: transparent;
+  width: 0;
+}
+
+.toggle {
+  font-family: 'Lato Black', sans-serif;
+  display: inline-block;
+
+  &__view {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    user-select: none;
+
+    &:before,
+    &:after {
+      @include text;
+      transition: width linear .1s;
+    }
+
+    &:before {
+      content: 'on';
+      @include active-text;
+    }
+
+    &:after {
+      content: 'off';
+      @include inactive-text;
+    }
+  }
+
+  &__view-switch {
+    color: white;
+    transform: translate(0, .8%); // the circle is lifted a little by default
+  }
+
+  &__checkbox {
+    display: none;
+
+    &:not(:checked) + .toggle__view {
+      background: color(light-grey);
+
+      &:before {
+        @include inactive-text;
+      }
+      &:after {
+        @include active-text;
+      }
+    }
+  }
+
+  &_size {
+    @mixin size-modifier(
+      $name,
+      $fontSize,
+      $width,
+      $height
+    ) {
+      &_#{$name} {
+        .toggle__view {
+          font-size: $fontSize;
+          width: $width;
+          height: $height;
+          padding: {
+            left: $height / 15;
+            right: $height / 15;
+          }
+          border-radius: $height / 2;
+        }
+
+        .toggle__view-switch {
+          font-size: $height * 1.5;
+        }
+      }
+    }
+
+    @include size-modifier(
+      $name: s,
+      $fontSize: .57rem,
+      $width: 2.1rem,
+      $height: 1rem
+    );
+
+    @include size-modifier(
+      $name: m,
+      $fontSize: .75rem,
+      $width: 3.7rem,
+      $height: 1.5rem
+    );
+  }
+
+  &_color {
+    @mixin color-modifier($color) {
+      &_#{$color} {
+        .toggle__view {
+          background: color($color);
+        }
+      }
+    }
+
+    @include color-modifier(terracotta);
+    @include color-modifier(turquoise);
+  }
+}
