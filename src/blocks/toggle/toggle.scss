@@ -1,22 +1,5 @@
 @import '../../color';
 
-@mixin text {
-  display: block;
-  overflow: hidden;
-  text-align: center;
-  text-transform: uppercase;
-}
-
-@mixin active-text {
-  color: white;
-  width: 100%;
-}
-
-@mixin inactive-text {
-  color: transparent;
-  width: 0;
-}
-
 .toggle {
   font-family: 'Lato Black', sans-serif;
   display: inline-block;
@@ -29,39 +12,29 @@
 
     &:before,
     &:after {
-      @include text;
+      display: block;
+      overflow: hidden;
+      color: white;
+      text-align: center;
+      text-transform: uppercase;
       transition: width linear .1s;
     }
 
     &:before {
       content: 'on';
-      @include active-text;
     }
 
     &:after {
       content: 'off';
-      @include inactive-text;
     }
   }
 
-  &__view-switch {
-    color: white;
-    transform: translate(0, .8%); // the circle is lifted a little by default
-  }
-
-  &__checkbox {
-    display: none;
-
-    &:not(:checked) + .toggle__view {
-      background: color(light-grey);
-
-      &:before {
-        @include inactive-text;
-      }
-      &:after {
-        @include active-text;
-      }
-    }
+  &__view-switch:before {
+    content: '';
+    display: block;
+    background: white;
+    padding-top: 100%;
+    border-radius: 100%;
   }
 
   &_size {
@@ -72,19 +45,43 @@
       $height
     ) {
       &_#{$name} {
+        $indent: $height / 9;
+        $switchRadius: $height - 2 * $indent;
+
         .toggle__view {
           font-size: $fontSize;
           width: $width;
           height: $height;
-          padding: {
-            left: $height / 15;
-            right: $height / 15;
-          }
+          padding: $indent;
           border-radius: $height / 2;
+
+          &:before {
+            width: $width - 2 * $indent - $switchRadius;
+          }
+
+          &:after {
+            width: 0;
+          }
         }
 
         .toggle__view-switch {
-          font-size: $height * 1.5;
+          width: $switchRadius;
+        }
+
+        .toggle__checkbox {
+          display: none;
+
+          &:not(:checked) + .toggle__view {
+            background: color(light-grey);
+
+            &:before {
+              width: 0;
+            }
+
+            &:after {
+              width: $width - 2 * $indent - $switchRadius;
+            }
+          }
         }
       }
     }
