@@ -1,0 +1,29 @@
+mixin tick-box(mods)
+  -
+    const { getClassList } = globals;
+
+    const tickBoxElement = (name) => (
+      getClassList({
+        block: 'tick-box',
+        element: name
+      })
+    );
+
+    const defaults = {
+      color: 'terracotta',
+      size: 'm'
+    };
+
+    const tickBox = getClassList({
+      block: 'tick-box',
+      mods: Object.assign(defaults, mods)
+    });
+    const checkbox = tickBoxElement('checkbox');
+    const view = tickBoxElement('view');
+
+  label(class=tickBox)
+    input(
+      type='checkbox'
+      class=checkbox
+    )
+    span(class=view)

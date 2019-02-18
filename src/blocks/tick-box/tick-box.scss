@@ -1,0 +1,67 @@
+@import '../../color';
+
+.tick-box {
+  display: inline-block;
+  cursor: pointer;
+
+  &__view {
+    display: block;
+    height: 100%;
+    border-radius: 50%;
+    transition: .2s;
+
+    &:before {
+      content: '';
+      display: block;
+      width: 21%;
+      height: 42%;
+      border: solid white;
+      border: {
+        top: transparent;
+        left: transparent;
+      }
+      transform: translate(110%, 30%) rotate(45deg);
+    }
+  }
+
+  &__checkbox {
+    display: none;
+
+    &:not(:checked) + .tick-box__view {
+      background: color(light-grey);
+
+      &:before {
+        border-color: #c0c0c0;
+      }
+    }
+  }
+
+  &_size {
+    @mixin size-modifier ($name, $diameter) {
+      &_#{$name} {
+        width: $diameter;
+        height: $diameter;
+
+        .tick-box__view:before {
+          border-width: $diameter / 10.77;
+        }
+      }
+    }
+
+    @include size-modifier(s, .92rem);
+    @include size-modifier(m, 1.4rem);
+  }
+
+  &_color {
+    @mixin color-modifier($color) {
+      &_#{$color} {
+        .tick-box__view {
+          background: color($color);
+        }
+      }
+    }
+
+    @include color-modifier(terracotta);
+    @include color-modifier(turquoise);
+  }
+}
