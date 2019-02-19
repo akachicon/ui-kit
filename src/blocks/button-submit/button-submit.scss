@@ -1,0 +1,57 @@
+@import '../../color';
+
+.button-submit {
+  font-family: 'Lato Black', sans-serif;
+  font-size: .78rem;
+  text-transform: uppercase;
+  border-width: 1px 1px 0 1px;
+  border-radius: .2rem;
+  border-style: solid;
+  overflow: hidden;
+  transition: all .1s linear;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &__text {
+    color: white;
+  }
+
+  &_size {
+    &_s {
+      font-size: .65rem;
+      padding: .33rem 1rem .15rem 1rem;
+      box-shadow: 0 2px;
+
+      &:active {
+        transform: translate(0, 2px);
+        box-shadow: 0 0;
+      }
+    }
+
+    &_m {
+      padding: .58rem 1.98rem .4rem 1.98rem;
+      box-shadow: 0 4px;
+
+      &:active {
+        transform: translate(0, 4px);
+        box-shadow: 0 0;
+      }
+    }
+  }
+
+  &_color {
+    &_terracotta {
+      color: #bf3e1f;
+      background: color(terracotta);
+      border-color: color(terracotta);
+    }
+
+    &_turquoise {
+      color: #28a290;
+      background: color(turquoise);
+      border-color: color(turquoise);
+    }
+  }
+}

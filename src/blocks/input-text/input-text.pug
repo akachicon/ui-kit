@@ -1,0 +1,34 @@
+mixin input-text(params)
+  -
+    const { getClassList } = globals;
+
+    const inputTextElement = (name, mods) => (
+      getClassList({
+        block: 'input-text',
+        element: name,
+        mods
+      })
+    );
+
+    const defaults = {};
+
+    const inputText = getClassList({
+      block: 'input-text',
+      mods: Object.assign(defaults, mods)
+    });
+    const input = inputTextElement('input');
+
+  div(class=inputText)
+    input(
+      type='text'
+      class=input
+      placeholder=params.placeholder
+    )
+
+    if (typeof params.hint === 'object')
+      - const { text, color, hidden } = params.hint;
+
+      div(class=inputTextElement('hint', {
+        color,
+        hidden
+      }))= text

@@ -1,0 +1,23 @@
+mixin button-submit(buttonText, mods)
+  -
+    const { getClassList } = globals;
+
+    const defaults = {
+      size: 'm',
+      color: 'terracotta'
+    };
+
+    const buttonSubmit = getClassList({
+      block: 'button-submit',
+      mods: Object.assign(defaults, mods)
+    });
+    const text = getClassList({
+      block: 'button-submit',
+      element: 'text'
+    });
+
+  button(
+    type=submit
+    class=buttonSubmit
+  )
+    span(class=text)= buttonText

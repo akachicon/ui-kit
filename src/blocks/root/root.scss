@@ -12,6 +12,7 @@
 $fonts: (
         'Lato Black': './fonts/lato-black/lato-black',
         'Lato Light': './fonts/lato-light/lato-light',
+        'SourceSansPro': './fonts/source-sans-pro/source-sans-pro'
 );
 
 @each $font, $path in $fonts {

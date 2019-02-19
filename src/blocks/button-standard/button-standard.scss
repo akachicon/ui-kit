@@ -75,6 +75,7 @@
     transform: translate(-50%, -50%) scale(0);
     background: white;
     opacity: .7;
+    pointer-events: none;
     animation: ripple .5s linear;
 
     @keyframes ripple {

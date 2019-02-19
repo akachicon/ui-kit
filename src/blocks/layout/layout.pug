@@ -6,9 +6,47 @@ include ../range-slider/range-slider
 include ../stages/stages
 include ../toggle/toggle
 include ../tick-box/tick-box
+include ../input-text/input-text
+include ../text-area/text-area
+include ../button-submit/button-submit
 
 mixin layout
-  +tick-box({
-    color: 'turquoise',
-    size: 'm'
-  })
+  div(style='width: 287px;')
+    +input-text({
+      placeholder: 'Your Name',
+      hint: {
+        text: 'error',
+        color: 'terracotta',
+        hidden: false
+      }
+    })
+    br
+    +input-text({
+      placeholder: 'Your Email',
+      hint: {
+        text: 'thanks!',
+        color: 'turquoise',
+        hidden: false
+      }
+    })
+    br
+    +input-text({
+      placeholder: 'Hidden Hint',
+      hint: {
+        text: 'thanks!',
+        color: 'turquoise',
+        hidden: true
+      }
+    })
+    br
+    +input-text({
+      placeholder: 'No Hint',
+      hint: false
+    })
+    br
+    +text-area({
+      placeholder: 'Your Message'
+    })
+    br
+    +button-submit('submit')
+

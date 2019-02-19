@@ -1,0 +1,72 @@
+@import '../../color';
+
+.input-text {
+  display: flex;
+  height: 1.8rem;
+
+  &__input {
+    font-family: 'SourceSansPro', sans-serif;
+    font-size: .9rem;
+    color: color(dark-grey);
+    flex-grow: 1;
+    min-width: 0;
+    padding: {
+      bottom: .3rem;
+      left: .8rem;
+      right: .8rem;
+    }
+    border: none;
+    border-radius: .2rem;
+    background: color(light-grey);
+
+    &::placeholder {
+      color: color(grey);
+    }
+  }
+
+  &__hint {
+    font-family: 'Lato Black', sans-serif;
+    font-size: .65rem;
+    text-transform: uppercase;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    min-width: 4.5rem;
+    max-width: 4.5rem;
+    min-height: 100%;
+    margin-left: .38rem;
+    border-radius: .3rem;
+
+    &:before {
+      content: '';
+      display: block;
+      position: absolute;
+      right: 100%;
+      border: {
+        top: .25rem solid transparent;
+        bottom: .25rem solid transparent;
+        right: .25rem solid;
+        right-color: inherit;
+      }
+    }
+
+    &_hidden {
+      visibility: hidden;
+    }
+
+    &_color {
+      &_terracotta {
+        background: color(terracotta);
+        border-color: color(terracotta);
+      }
+
+      &_turquoise {
+        background: color(turquoise);
+        border-color: color(turquoise);
+      }
+    }
+  }
+}

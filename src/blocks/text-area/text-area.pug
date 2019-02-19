@@ -1,0 +1,14 @@
+mixin text-area({ placeholder, rows = 4 })
+  -
+    const { getClassList } = globals;
+    const defaults = {};
+    const textArea = getClassList({
+      block: 'text-area',
+      mods: Object.assign(defaults)
+    });
+
+  textarea(
+    class=textArea
+    placeholder=placeholder
+    rows=rows
+  )

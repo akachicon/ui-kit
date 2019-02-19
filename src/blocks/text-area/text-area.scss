@@ -1,0 +1,25 @@
+@import '../../color';
+
+.text-area {
+  font-family: 'SourceSansPro', sans-serif;
+  font-size: .9rem;
+  color: color(dark-grey);
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  padding: {
+    top: .6rem;
+    left: .8rem;
+    right: .8rem;
+    bottom: .4rem;
+  };
+  margin: 0;
+  border: none;
+  border-radius: .2rem;
+  resize: none;
+  background: color(light-grey);
+
+  &::placeholder {
+    color: color(grey);
+  }
+}
